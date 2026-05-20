@@ -1,0 +1,132 @@
+.dubois-chart {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.dubois-chart__title {
+  margin: 0 0 20px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--exhibit-ink-muted);
+  text-align: center;
+}
+
+.dubois-spiral__svg,
+.dubois-mountain__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.dubois-chart--spiral .dubois-spiral__svg {
+  max-width: min(520px, 100%);
+  margin: 0 auto;
+}
+
+.dubois-chart--mountain .dubois-mountain__svg {
+  max-width: min(720px, 100%);
+  margin: 0 auto;
+}
+
+.dubois-spiral__label {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-style: italic;
+  fill: var(--exhibit-ink);
+}
+
+.dubois-spiral__decade {
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+
+.dubois-spiral__value {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  fill: var(--exhibit-accent);
+}
+
+.dubois-chart__legend {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 20px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--exhibit-ink-faint);
+}
+
+.dubois-chart__legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dubois-chart__legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.dubois-mountain__grid line {
+  stroke: var(--dubois-dusty-rose);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+  opacity: 0.55;
+}
+
+.dubois-mountain__axis line {
+  stroke: var(--exhibit-border);
+}
+
+.dubois-mountain__axis text {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  fill: var(--exhibit-ink-faint);
+}
+
+.dubois-mountain__axis-label {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: var(--exhibit-ink-muted);
+}
+
+.dubois-mountain__annot-line {
+  stroke: var(--exhibit-accent);
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+  opacity: 0.75;
+}
+
+.dubois-mountain__annot-text {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  fill: var(--exhibit-accent);
+}
+
+.dubois-mountain__annot-text--renewal {
+  fill: var(--dubois-crimson);
+}
+
+@media (max-width: 640px) {
+  .dubois-chart__legend {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 8px;
+  }
+}
