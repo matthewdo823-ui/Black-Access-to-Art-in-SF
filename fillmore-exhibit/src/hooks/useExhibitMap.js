@@ -24,6 +24,23 @@ function setLayersVisibility(map, layerIds, visible) {
   }
 }
 
+async function loadMapboxAccessToken() {
+  const url = `${import.meta.env.BASE_URL}mapbox-token.json`
+  const response = await fetch(url)
+  if (!response.ok) {
+    throw new Error(
+      `Could not load ${url}. Run "npm run sync-mapbox-token" after setting VITE_MAPBOX_ACCESS_TOKEN in .env.`,
+    )
+  }
+  const { accessToken } = await response.json()
+  if (!accessToken) {
+    throw new Error(
+      'mapbox-token.json is missing accessToken. Run "npm run sync-mapbox-token".',
+    )
+  }
+  return accessToken
+}
+
 export function useExhibitMap(containerRef) {
   const mapRef = useRef(null)
   const [mapReady, setMapReady] = useState(false)
@@ -59,107 +76,116 @@ export function useExhibitMap(containerRef) {
     const container = containerRef.current
     if (!container) return
 
-    const token = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
-    if (!token) {
-      console.warn(
-        'Set VITE_MAPBOX_ACCESS_TOKEN in .env — get a token at https://account.mapbox.com',
-      )
-    }
-    mapboxgl.accessToken = token ?? ''
+    let cancelled = false
+    let map
 
-    const map = new mapboxgl.Map({
-      container,
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: [-122.42, 37.785],
-      zoom: 13.3,
-    })
+    loadMapboxAccessToken()
+      .then((token) => {
+        if (cancelled) return
+        mapboxgl.accessToken = token
 
-    map.addControl(new mapboxgl.NavigationControl())
-    map.scrollZoom.disable()
-    mapRef.current = map
+        map = new mapboxgl.Map({
+          container,
+          style: 'mapbox://styles/mapbox/light-v11',
+          center: [-122.42, 37.785],
+          zoom: 13.3,
+        })
 
-    map.on('load', () => {
-      map.setFog({})
+        map.addControl(new mapboxgl.NavigationControl())
+        map.scrollZoom.disable()
+        mapRef.current = map
 
-      map.addSource('civic_art_collection', {
-        type: 'geojson',
-        data: `${GEOJSON_BASE}/Civic_Art_Collection_20260502.geojson`,
-      })
-      map.addLayer({
-        id: 'civic_art_collection',
-        type: 'circle',
-        source: 'civic_art_collection',
-        layout: { visibility: 'none' },
-        paint: {
-          'circle-radius': 5,
-          'circle-color': '#80ffe6',
-        },
-      })
+        map.on('load', () => {
+          if (cancelled) return
 
-      map.addSource('cultural_districts', {
-        type: 'geojson',
-        data: `${GEOJSON_BASE}/Cultural_Districts_20260502.geojson`,
-      })
-      map.addLayer({
-        id: 'cultural_districts',
-        type: 'line',
-        source: 'cultural_districts',
-        layout: { visibility: 'none' },
-        paint: {
-          'line-color': '#9A7B38',
-          'line-width': 1.5,
-          'line-opacity': 0.6,
-          'line-dasharray': [3, 3],
-        },
-      })
+          map.setFog({})
 
-      map.addSource('fullmappinginequality', {
-        type: 'geojson',
-        data: `${GEOJSON_BASE}/fullmappinginequality.json`,
-      })
-      map.addLayer({
-        id: 'fullmappinginequality',
-        type: 'fill',
-        source: 'fullmappinginequality',
-        paint: {
-          'fill-color': '#bf0000',
-          'fill-opacity': 0.15,
-        },
-        filter: ['==', ['get', 'grade'], 'D'],
-      })
-      map.addLayer({
-        id: 'holc-redlined-outline',
-        type: 'line',
-        source: 'fullmappinginequality',
-        filter: ['==', ['get', 'grade'], 'D'],
-        paint: {
-          'line-color': '#8B2020',
-          'line-width': 2,
-          'line-opacity': 0.8,
-        },
-      })
+          map.addSource('civic_art_collection', {
+            type: 'geojson',
+            data: `${GEOJSON_BASE}/Civic_Art_Collection_20260502.geojson`,
+          })
+          map.addLayer({
+            id: 'civic_art_collection',
+            type: 'circle',
+            source: 'civic_art_collection',
+            layout: { visibility: 'none' },
+            paint: {
+              'circle-radius': 5,
+              'circle-color': '#80ffe6',
+            },
+          })
 
-      map.addSource('one_percent_art', {
-        type: 'geojson',
-        data: `${GEOJSON_BASE}/Public_Art_(from_1%25_Art_Program)_20260502.geojson`,
-      })
-      map.addLayer({
-        id: 'one_percent_art',
-        type: 'circle',
-        source: 'one_percent_art',
-        paint: {
-          'circle-radius': 5,
-          'circle-color': '#ffd52e',
-        },
-      })
+          map.addSource('cultural_districts', {
+            type: 'geojson',
+            data: `${GEOJSON_BASE}/Cultural_Districts_20260502.geojson`,
+          })
+          map.addLayer({
+            id: 'cultural_districts',
+            type: 'line',
+            source: 'cultural_districts',
+            layout: { visibility: 'none' },
+            paint: {
+              'line-color': '#9A7B38',
+              'line-width': 1.5,
+              'line-opacity': 0.6,
+              'line-dasharray': [3, 3],
+            },
+          })
 
-      setMapReady(true)
-    })
+          map.addSource('fullmappinginequality', {
+            type: 'geojson',
+            data: `${GEOJSON_BASE}/fullmappinginequality.json`,
+          })
+          map.addLayer({
+            id: 'fullmappinginequality',
+            type: 'fill',
+            source: 'fullmappinginequality',
+            paint: {
+              'fill-color': '#bf0000',
+              'fill-opacity': 0.15,
+            },
+            filter: ['==', ['get', 'grade'], 'D'],
+          })
+          map.addLayer({
+            id: 'holc-redlined-outline',
+            type: 'line',
+            source: 'fullmappinginequality',
+            filter: ['==', ['get', 'grade'], 'D'],
+            paint: {
+              'line-color': '#8B2020',
+              'line-width': 2,
+              'line-opacity': 0.8,
+            },
+          })
+
+          map.addSource('one_percent_art', {
+            type: 'geojson',
+            data: `${GEOJSON_BASE}/Public_Art_(from_1%25_Art_Program)_20260502.geojson`,
+          })
+          map.addLayer({
+            id: 'one_percent_art',
+            type: 'circle',
+            source: 'one_percent_art',
+            paint: {
+              'circle-radius': 5,
+              'circle-color': '#ffd52e',
+            },
+          })
+
+          setMapReady(true)
+        })
+      })
+      .catch((error) => {
+        console.error(error)
+      })
 
     return () => {
-      map.remove()
-      mapRef.current = null
-      setMapReady(false)
+      cancelled = true
+      if (map) {
+        map.remove()
+        mapRef.current = null
+        setMapReady(false)
+      }
     }
   }, [containerRef])
 

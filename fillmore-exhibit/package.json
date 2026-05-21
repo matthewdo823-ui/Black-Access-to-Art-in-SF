@@ -4,12 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "sync-mapbox-token": "node scripts/sync-mapbox-token.mjs",
+    "predev": "npm run sync-mapbox-token",
+    "prebuild": "npm run sync-mapbox-token",
     "dev": "vite",
     "build": "vite build",
+    "clean": "rm -rf dist",
     "lint": "eslint .",
     "preview": "vite preview",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
+    "deploy": "node scripts/deploy-help.mjs",
+    "deploy:commit": "node scripts/stage-deploy.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
