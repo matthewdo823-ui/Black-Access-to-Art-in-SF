@@ -33,6 +33,12 @@ Pruitt-Igoe: Pruitt-Igoe shows how even potentially honorable state policy can c
   },
 ]
 
+export const EXHIBIT_PROCESS_CARD = {
+  label: 'Making This Exhibit',
+  content: `Process
+Making this exhibit was a lot of fun; I'm currently learning more about web dev, but I've spent a lot of time on backend and systems, so this was a great oppertunity to focus on design and UI. This was also a struggle, though. Spending a lot of time trying to make sure boxes were alligned meant I couldn't fully tell the stories I wanted to. The exhibits are somewhat sparse for a website because by the time I integrated a graph, I ran out of time to find more data. Still, I think it taught me the power of simplicity/minimalism. As long as the narriative gets across, and the proper emotions are felt, I would deem this project a success.`,
+}
+
 export const LAYER_CONTROLS = [
   {
     id: 'fullmappinginequality',

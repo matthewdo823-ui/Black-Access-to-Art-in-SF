@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { EXHIBIT_CONTEXT_CARDS, LAYER_CONTROLS } from '../data/exhibitContext'
+import {
+  EXHIBIT_CONTEXT_CARDS,
+  EXHIBIT_PROCESS_CARD,
+  LAYER_CONTROLS,
+} from '../data/exhibitContext'
 import { useExhibitMap } from '../hooks/useExhibitMap'
 import './Exhibit3.css'
 
@@ -246,6 +250,41 @@ export default function Exhibit3() {
               </article>
             ))}
           </div>
+
+          <article
+            className="context-card context-card--process"
+            role="button"
+            tabIndex={0}
+            aria-label={`Read more about ${EXHIBIT_PROCESS_CARD.label}`}
+            onClick={() =>
+              openModal(EXHIBIT_PROCESS_CARD.label, EXHIBIT_PROCESS_CARD.content)
+            }
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault()
+                openModal(
+                  EXHIBIT_PROCESS_CARD.label,
+                  EXHIBIT_PROCESS_CARD.content,
+                )
+              }
+            }}
+          >
+            <div className="context-card__header">
+              <span className="context-card__index" aria-hidden="true">
+                {String(EXHIBIT_CONTEXT_CARDS.length + 1).padStart(2, '0')}
+              </span>
+              <h3 className="context-card__title">{EXHIBIT_PROCESS_CARD.label}</h3>
+            </div>
+            <p className="context-card__preview">
+              {cardPreview(EXHIBIT_PROCESS_CARD.content)}
+            </p>
+            <span className="context-card__cta">
+              Read full entry
+              <span className="context-card__cta-arrow" aria-hidden="true">
+                →
+              </span>
+            </span>
+          </article>
         </section>
       </div>
 

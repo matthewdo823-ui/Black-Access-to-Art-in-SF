@@ -397,6 +397,12 @@ body.fullscreen-active {
 .context-card:nth-child(5) { --card-accent: #9a6b6b; }
 .context-card:nth-child(6) { --card-accent: #5d4e3f; }
 
+.context-card--process {
+    --card-accent: #6b5b8a;
+    margin-top: 28px;
+    min-height: 200px;
+}
+
 .context-card:hover,
 .context-card:focus-visible {
     transform: translateY(-3px);
