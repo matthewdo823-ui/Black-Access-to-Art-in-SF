@@ -24,7 +24,14 @@
 .exhibit-card-link:hover .exhibit-card {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    background: #f3e7d9;
+    border-color: rgba(120, 98, 60, 0.18);
 }
+
+.enter-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  }
 
 .dashboard-shell {
     width: min(1100px, 100%);

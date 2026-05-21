@@ -123,6 +123,13 @@
   fill: var(--dubois-crimson);
 }
 
+.decline-chart__pct {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  fill: var(--dubois-crimson);
+}
+
 @media (max-width: 640px) {
   .dubois-chart__legend {
     flex-direction: column;

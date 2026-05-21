@@ -6,11 +6,12 @@ import { useChartScrollEnter } from '../../hooks/useChartScrollEnter'
 import './DuBoisCharts.css'
 
 const VENUE_DATA = [
-  { decade: '1930s', venues: 12 },
-  { decade: '1940s', venues: 28 },
-  { decade: '1950s', venues: 22 },
-  { decade: '1960s', venues: 14 },
-  { decade: '1970s', venues: 4 },
+  { decade: '1930s', venues: 2 },
+  { decade: '1940s', venues: 13 },
+  { decade: '1950s', venues: 35 },
+  { decade: '1960s', venues: 15 },
+  { decade: '1970s', venues: 3 },
+  { decade: "1980's", venues: 1 },
 ]
 
 const SIZE = 520
@@ -45,11 +46,14 @@ function buildArcs() {
       endAngle,
     })
 
-    const labelR = outerR + 22
+    const labelR = outerR + (d.decade === "1980's" ? 30 : 22)
     const labelX = Math.sin(midAngle) * labelR
     const labelY = -Math.cos(midAngle) * labelR
-    const rotate = (midAngle * 180) / Math.PI
-    const flip = midAngle > Math.PI / 2 && midAngle < (Math.PI * 3) / 2
+    const normalizedAngle =
+      ((midAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2)
+    const rotate = (normalizedAngle * 180) / Math.PI
+    const flip =
+      normalizedAngle > Math.PI / 2 && normalizedAngle < (Math.PI * 3) / 2
 
     return {
       ...d,

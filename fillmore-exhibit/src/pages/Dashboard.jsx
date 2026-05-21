@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import './Dashboard.css'
 
 const EXHIBITS = [
-  { index: 'I', title: 'The Harlem of the West', path: '/exhibit/1', active: true },
-  { index: 'II', title: 'Urban Renewal', path: '/exhibit/3', active: false },
+  { index: 'I', title: 'The Harlem of the West', path: '/exhibit/1', active: false },
+  { index: 'II', title: 'Urban Renewal', path: '/exhibit/2', active: false },
   { index: 'III', title: 'A Moderninity Gap in the Map', path: '/exhibit/3', active: false },
 ]
 

@@ -1,0 +1,21 @@
+.displacement-skeleton__grid line {
+  stroke: rgba(143, 126, 111, 0.22);
+  stroke-width: 1;
+}
+
+.displacement-skeleton__badge {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: #8f7e6f;
+}
+
+.displacement-skeleton__note {
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8f7e6f;
+}

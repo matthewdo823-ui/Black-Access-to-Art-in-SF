@@ -4,6 +4,14 @@ import { EXHIBIT_CONTEXT_CARDS, LAYER_CONTROLS } from '../data/exhibitContext'
 import { useExhibitMap } from '../hooks/useExhibitMap'
 import './Exhibit3.css'
 
+const CARD_PREVIEW_LENGTH = 160
+
+function cardPreview(text) {
+  const normalized = text.replace(/\s+/g, ' ').trim()
+  if (normalized.length <= CARD_PREVIEW_LENGTH) return normalized
+  return `${normalized.slice(0, CARD_PREVIEW_LENGTH).trim()}…`
+}
+
 export default function Exhibit3() {
   const mapContainerRef = useRef(null)
   const mapFrameRef = useRef(null)
@@ -119,7 +127,7 @@ export default function Exhibit3() {
             <h1>The gap has a shape. It can be mapped.</h1>
             <p className="intro-copy">
               Modern arts institutions cluster where Black residents no longer live;
-              followingthe exact boundaries of historic redlining.
+              following the exact boundaries of historic redlining.
             </p>
 
             <section className="legend-card">
@@ -204,12 +212,13 @@ export default function Exhibit3() {
           </p>
 
           <div className="context-grid">
-            {EXHIBIT_CONTEXT_CARDS.map((card) => (
-              <div
+            {EXHIBIT_CONTEXT_CARDS.map((card, index) => (
+              <article
                 key={card.label}
-                className="context-card"
+                className={`context-card${card.large ? ' context-card--large' : ''}`}
                 role="button"
                 tabIndex={0}
+                aria-label={`Read more about ${card.label}`}
                 onClick={() => openModal(card.label, card.content)}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter' || event.key === ' ') {
@@ -218,13 +227,23 @@ export default function Exhibit3() {
                   }
                 }}
               >
-                <span className="card-label">{card.label}</span>
-                <div
-                  className={`card-content${card.large ? ' card-content-large' : ''}`}
-                >
+                <div className="context-card__header">
+                  <span className="context-card__index" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="context-card__title">{card.label}</h3>
+                </div>
+                <p className="context-card__preview">{cardPreview(card.content)}</p>
+                <span className="context-card__cta">
+                  Read full entry
+                  <span className="context-card__cta-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </span>
+                <div className="card-content" hidden>
                   {card.content}
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </section>

@@ -5,15 +5,15 @@ import { useChartScrollEnter } from '../../hooks/useChartScrollEnter'
 import './DuBoisCharts.css'
 
 const POPULATION_DATA = [
-  { year: 1930, population: 1600 },
-  { year: 1940, population: 2144 },
-  { year: 1950, population: 14888 },
-  { year: 1960, population: 25000 },
-  { year: 1970, population: 31000 },
-  { year: 1980, population: 20000 },
+  { year: 1970, black_population: 96078, percent: 13.4 },
+  { year: 1980, black_population: 86190, percent: 12.7 },
+  { year: 1990, black_population: 78931, percent: 10.9 },
+  { year: 2000, black_population: 60515, percent: 7.8 },
+  { year: 2010, black_population: 48870, percent: 6.1 },
+  { year: 2020, black_population: 47066, percent: 5.4 },
 ]
 
-const MARGIN = { top: 28, right: 36, bottom: 48, left: 72 }
+const MARGIN = { top: 28, right: 48, bottom: 48, left: 72 }
 const WIDTH = 720
 const HEIGHT = 380
 const INNER_W = WIDTH - MARGIN.left - MARGIN.right
@@ -27,20 +27,20 @@ function buildScales() {
 
   const y = d3
     .scaleLinear()
-    .domain([0, d3.max(POPULATION_DATA, (d) => d.population) * 1.08])
+    .domain([0, d3.max(POPULATION_DATA, (d) => d.black_population) * 1.06])
     .range([INNER_H, 0])
 
   const area = d3
     .area()
     .x((d) => x(d.year))
     .y0(INNER_H)
-    .y1((d) => y(d.population))
+    .y1((d) => y(d.black_population))
     .curve(d3.curveMonotoneX)
 
   const line = d3
     .line()
     .x((d) => x(d.year))
-    .y((d) => y(d.population))
+    .y((d) => y(d.black_population))
     .curve(d3.curveMonotoneX)
 
   return { x, y, areaPath: area(POPULATION_DATA), linePath: line(POPULATION_DATA) }
@@ -48,17 +48,12 @@ function buildScales() {
 
 const { x, y, areaPath, linePath } = buildScales()
 
-export default function PopulationMountainChart() {
+export default function BlackPopulationDeclineChart() {
   const svgRef = useRef(null)
   const playedRef = useRef(false)
 
-  const xTicks = x.ticks(6).filter((t) => t % 10 === 0)
+  const xTicks = POPULATION_DATA.map((d) => d.year)
   const yTicks = y.ticks(5)
-
-  const peakYear = 1950
-  const renewalYear = 1970
-  const peakX = x(peakYear)
-  const renewalX = x(renewalYear)
 
   const formatPop = (value) => {
     if (value >= 1000) return `${Math.round(value / 1000)}k`
@@ -71,7 +66,8 @@ export default function PopulationMountainChart() {
 
     const clipRect = svgRef.current.querySelector('.dubois-mountain__clip-rect')
     const ridge = svgRef.current.querySelector('.dubois-mountain__ridge')
-    const annots = svgRef.current.querySelectorAll('.dubois-mountain__annot')
+    const dots = svgRef.current.querySelectorAll('.decline-chart__dot')
+    const labels = svgRef.current.querySelectorAll('.decline-chart__pct')
     const grid = svgRef.current.querySelectorAll('.dubois-mountain__grid line')
 
     if (clipRect) {
@@ -99,9 +95,22 @@ export default function PopulationMountainChart() {
     )
 
     gsap.fromTo(
-      annots,
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.65, stagger: 0.2, delay: 1.1, ease: 'power2.out' },
+      dots,
+      { opacity: 0, attr: { r: 0 } },
+      {
+        opacity: 1,
+        attr: { r: 5 },
+        duration: 0.45,
+        stagger: 0.1,
+        delay: 1.2,
+        ease: 'back.out(1.4)',
+      },
+    )
+
+    gsap.fromTo(
+      labels,
+      { opacity: 0, y: 6 },
+      { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, delay: 1.35, ease: 'power2.out' },
     )
   }, [])
 
@@ -122,11 +131,11 @@ export default function PopulationMountainChart() {
   return (
     <figure
       ref={containerRef}
-      className="dubois-chart dubois-chart--mountain"
-      aria-label="Black population in the Fillmore over time, area chart"
+      className="dubois-chart dubois-chart--mountain decline-chart"
+      aria-label="Black population decline in San Francisco from 1970 to 2020"
     >
       <figcaption className="dubois-chart__title">
-        Black Population in the Fillmore
+        Black Population in San Francisco
       </figcaption>
 
       <svg
@@ -137,17 +146,17 @@ export default function PopulationMountainChart() {
       >
         <defs>
           <linearGradient
-            id="dubois-mountain-gradient"
+            id="decline-chart-gradient"
             x1="0%"
-            y1="100%"
+            y1="0%"
             x2="100%"
-            y2="0%"
+            y2="100%"
           >
-            <stop offset="0%" stopColor="var(--dubois-crimson)" />
-            <stop offset="55%" stopColor="var(--dubois-vermillion)" />
-            <stop offset="100%" stopColor="var(--dubois-gold)" />
+            <stop offset="0%" stopColor="var(--dubois-teal)" />
+            <stop offset="50%" stopColor="var(--dubois-vermillion)" />
+            <stop offset="100%" stopColor="var(--dubois-crimson)" />
           </linearGradient>
-          <clipPath id="dubois-mountain-clip">
+          <clipPath id="decline-chart-clip">
             <rect
               className="dubois-mountain__clip-rect"
               x={0}
@@ -183,10 +192,10 @@ export default function PopulationMountainChart() {
           <path
             className="dubois-mountain__area"
             d={areaPath}
-            fill="url(#dubois-mountain-gradient)"
-            stroke="var(--dubois-gold)"
+            fill="url(#decline-chart-gradient)"
+            stroke="var(--dubois-crimson)"
             strokeWidth={2}
-            clipPath="url(#dubois-mountain-clip)"
+            clipPath="url(#decline-chart-clip)"
           />
 
           <path
@@ -197,6 +206,27 @@ export default function PopulationMountainChart() {
             strokeWidth={1.5}
             opacity={0.55}
           />
+
+          {POPULATION_DATA.map((d) => (
+            <g key={d.year} transform={`translate(${x(d.year)}, ${y(d.black_population)})`}>
+              <circle
+                className="decline-chart__dot"
+                r={5}
+                fill="var(--dubois-crimson)"
+                stroke="#fff"
+                strokeWidth={1.5}
+                opacity={0}
+              />
+              <text
+                className="decline-chart__pct"
+                y={-14}
+                textAnchor="middle"
+                opacity={0}
+              >
+                {d.percent}%
+              </text>
+            </g>
+          ))}
 
           <g className="dubois-mountain__axis dubois-mountain__axis--x">
             {xTicks.map((tick) => (
@@ -221,43 +251,7 @@ export default function PopulationMountainChart() {
               transform={`translate(${-52}, ${INNER_H / 2}) rotate(-90)`}
               textAnchor="middle"
             >
-              Population
-            </text>
-          </g>
-
-          <g className="dubois-mountain__annot" opacity={0}>
-            <line
-              x1={peakX}
-              x2={peakX}
-              y1={y(30000)}
-              y2={INNER_H}
-              className="dubois-mountain__annot-line"
-            />
-            <text
-              x={peakX}
-              y={y(30000) - 14}
-              textAnchor="middle"
-              className="dubois-mountain__annot-text"
-            >
-              PEAK MIGRATION
-            </text>
-          </g>
-
-          <g className="dubois-mountain__annot" opacity={0}>
-            <line
-              x1={renewalX}
-              x2={renewalX}
-              y1={y(33000)}
-              y2={INNER_H}
-              className="dubois-mountain__annot-line"
-            />
-            <text
-              x={renewalX}
-              y={y(33000) - 14}
-              textAnchor="middle"
-              className="dubois-mountain__annot-text dubois-mountain__annot-text--renewal"
-            >
-              URBAN RENEWAL BEGINS
+              Black population
             </text>
           </g>
         </g>
