@@ -145,14 +145,7 @@
   padding: 0;
   opacity: 0;
   z-index: 1;
-}
-
-.closure-timeline__marker--above {
-  transform: translate(-50%, calc(-100% - 28px));
-}
-
-.closure-timeline__marker--below {
-  transform: translate(-50%, 28px);
+  transform: translate(-50%, -50%);
 }
 
 .closure-timeline__thumb {
@@ -160,7 +153,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 0;
   margin: 0;
   padding: 0;
   border: none;
@@ -169,8 +162,19 @@
   width: clamp(100px, 11.5vw, 132px);
 }
 
-.closure-timeline__marker--above .closure-timeline__thumb {
-  flex-direction: column-reverse;
+.closure-timeline__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.closure-timeline__stack--above {
+  gap: 10px;
+}
+
+.closure-timeline__stack--below {
+  gap: 14px;
 }
 
 .closure-timeline__caption {
@@ -213,11 +217,19 @@
 .closure-timeline__stem {
   display: block;
   width: 2px;
-  height: clamp(14px, 2.2vw, 20px);
-  border-radius: 999px;
-  background: var(--marker-accent, rgba(93, 78, 63, 0.45));
   flex-shrink: 0;
-  opacity: 0.55;
+  border-radius: 999px;
+  background: var(--marker-accent, rgba(93, 78, 63, 0.55));
+}
+
+.closure-timeline__stem--to-dot {
+  height: clamp(32px, 4.5vw, 44px);
+  opacity: 0.9;
+}
+
+.closure-timeline__stem--from-dot {
+  height: clamp(18px, 2.8vw, 26px);
+  opacity: 0.75;
 }
 
 .closure-timeline__frame {
@@ -256,11 +268,6 @@
     0 2px 0 rgba(255, 255, 255, 0.55) inset,
     0 16px 36px rgba(71, 56, 44, 0.26),
     0 0 0 2px var(--marker-accent, var(--dubois-gold, #c49a5c));
-}
-
-.closure-timeline__marker--below .closure-timeline__thumb:hover .closure-timeline__frame,
-.closure-timeline__marker--below .closure-timeline__thumb:focus-visible .closure-timeline__frame {
-  transform: translateY(3px) scale(1.04);
 }
 
 .closure-timeline__thumb:hover .closure-timeline__img,
@@ -355,8 +362,7 @@
   }
 
   .closure-timeline__marker,
-  .closure-timeline__marker--above,
-  .closure-timeline__marker--below {
+  .closure-timeline__marker--caption-above {
     position: relative;
     top: auto;
     left: auto;
@@ -364,8 +370,7 @@
     opacity: 1;
   }
 
-  .closure-timeline__thumb,
-  .closure-timeline__marker--above .closure-timeline__thumb {
+  .closure-timeline__thumb {
     flex-direction: row;
     align-items: stretch;
     gap: 12px;
@@ -373,10 +378,27 @@
     max-width: none;
   }
 
+  .closure-timeline__stack--above,
+  .closure-timeline__stack--below {
+    flex-direction: row;
+    flex: 1;
+    min-width: 0;
+    gap: 12px;
+    padding: 0;
+  }
+
+  .closure-timeline__stack--above {
+    order: 2;
+  }
+
+  .closure-timeline__stack--below {
+    order: 1;
+    flex: 0 0 auto;
+  }
+
   .closure-timeline__caption {
     flex: 1;
     min-width: 0;
-    order: 2;
     align-items: flex-start;
     text-align: left;
     padding: 10px 12px;
@@ -400,7 +422,6 @@
   }
 
   .closure-timeline__frame {
-    order: 1;
     flex-shrink: 0;
     width: 72px;
     height: 72px;
