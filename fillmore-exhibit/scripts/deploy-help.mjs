@@ -7,7 +7,10 @@ Deploy using GitHub Actions instead:
      Add secret: VITE_MAPBOX_ACCESS_TOKEN = your Mapbox pk. token
 
   2. Repo → Settings → Pages → Build and deployment
-     Source: GitHub Actions
+     Source: GitHub Actions  (required — workflow fails with "Get Pages site failed" without this)
+
+     Direct link:
+     https://github.com/matthewdo823-ui/Black-Access-to-Art-in-SF/settings/pages
 
   3. Commit from the REPO ROOT (Cluster HW — parent of fillmore-exhibit), not from fillmore-exhibit/:
 

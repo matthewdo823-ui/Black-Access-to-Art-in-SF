@@ -23,6 +23,37 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Enable GitHub Pages (workflow builds)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          api() {
+            curl -sS -o /tmp/pages-response.json -w "%{http_code}" \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "$@"
+          }
+
+          # Try update existing Pages config
+          code=$(api -X PUT "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages" \
+            -d '{"build_type":"workflow"}')
+          echo "PUT /pages → HTTP ${code}"
+
+          if [ "$code" = "404" ]; then
+            # First-time setup: create Pages site for workflow deploys
+            code=$(api -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages" \
+              -d '{"build_type":"workflow","source":{"branch":"main","path":"/"}}')
+            echo "POST /pages → HTTP ${code}"
+          fi
+
+          cat /tmp/pages-response.json || true
+          if [ "$code" != "200" ] && [ "$code" != "201" ] && [ "$code" != "204" ]; then
+            echo "::warning::Could not enable Pages via API (HTTP ${code})."
+            echo "::warning::In the repo on GitHub: Settings → Pages → Build and deployment → Source → GitHub Actions"
+          fi
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
