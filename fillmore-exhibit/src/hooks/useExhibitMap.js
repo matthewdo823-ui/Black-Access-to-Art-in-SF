@@ -3,7 +3,8 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { LAYER_CONTROLS } from '../data/exhibitContext'
 
-const GEOJSON_BASE = '/museum/geojson'
+// Must respect Vite base (PAGES_BASE on GitHub Pages), same as mapbox-token.json
+const GEOJSON_BASE = `${import.meta.env.BASE_URL}museum/geojson`
 
 const initialActiveLayers = () => {
   const active = new Set()
