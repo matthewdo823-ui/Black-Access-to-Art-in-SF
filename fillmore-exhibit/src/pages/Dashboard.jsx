@@ -16,7 +16,7 @@ export default function Dashboard() {
           <h1>
             The Fillmore Erased:
             <br />
-            Art, Space & Black Displacement
+            Access to Art in San Fransisco
           </h1>
           <p className="hero-copy">
             Three exhibits revealing how a neighborhood lost its culture; and where

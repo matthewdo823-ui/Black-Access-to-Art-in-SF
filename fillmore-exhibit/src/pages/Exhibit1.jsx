@@ -82,7 +82,7 @@ export default function Exhibit1() {
             <p className="eyebrow">Exhibit I · San Francisco, 1940–1970</p>
             <h1>The Harlem of the West</h1>
             <p className="intro-copy exhibit-chapter-lead">
-              Fillmore: a city filled with jazz, nightclubs, and the best Black artists of the time.
+              Fillmore: a city filled with jazz, nightclubs, and the greatest Black artists of the time.
             </p>
             <p className="scroll-hint">Scroll to enter the record</p>
           </article>

@@ -81,7 +81,7 @@ export default function Exhibit2() {
             <p className="eyebrow">Exhibit II · San Francisco, 1950–1980</p>
             <h1>Urban Renewal</h1>
             <p className="intro-copy exhibit2-lead">
-              Redevelopment, eminent domain, and the dismantling of the Fillmore corridor.
+              Redevelopment, eminent domain, and the dismantling of the Fillmore community.
             </p>
             <p className="scroll-hint">Scroll to follow the displacement record</p>
           </article>
@@ -117,7 +117,7 @@ export default function Exhibit2() {
           <article className="exhibit2-chapter exhibit2-chapter--timeline">
             <header className="exhibit2-chapter-header">
               <span className="chapter-num">03</span>
-              <h2>Closures Along the Corridor</h2>
+              <h2>Fillmore Closures</h2>
             </header>
             <div className="closure-timeline-panel">
               <ClosureTimeline />
