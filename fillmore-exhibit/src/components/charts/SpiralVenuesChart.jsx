@@ -128,7 +128,7 @@ export default function SpiralVenuesChart() {
     <figure
       ref={containerRef}
       className="dubois-chart dubois-chart--spiral"
-      aria-label="Black-owned jazz venues in the Fillmore by decade, spiral bar chart"
+      aria-label="Black-owned venues in the Fillmore by decade, spiral bar chart"
     >
       <figcaption className="dubois-chart__title">
         Black-Owned Jazz Venues in the Fillmore by Decade
