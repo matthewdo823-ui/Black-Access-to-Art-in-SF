@@ -220,7 +220,7 @@ export default function ClosureTimeline() {
             )
             .fromTo(
               markers,
-              { opacity: 0, y: (i) => (i % 2 === 0 ? -18 : 18) },
+              { opacity: 0, y: 14 },
               {
                 opacity: 1,
                 y: 0,
@@ -320,38 +320,22 @@ export default function ClosureTimeline() {
             >
               <button
                 type="button"
-                className="closure-timeline__thumb"
+                className="closure-timeline__trigger"
                 onClick={() => setActiveIndex(index)}
                 aria-label={`View ${entry.title}, closed ${formatYear(entry.year)}`}
               >
-                <span className="closure-timeline__stack closure-timeline__stack--above">
-                  <span className="closure-timeline__caption" aria-hidden="true">
-                    <span className="closure-timeline__year">
-                      {formatYear(entry.year)}
-                    </span>
-                    <span className="closure-timeline__title">
-                      {shortTitle(entry.title)}
-                    </span>
+                <span className="closure-timeline__caption">
+                  <span className="closure-timeline__year">
+                    {formatYear(entry.year)}
                   </span>
-                  <span
-                    className="closure-timeline__stem closure-timeline__stem--to-dot"
-                    aria-hidden="true"
-                  />
-                </span>
-                <span className="closure-timeline__stack closure-timeline__stack--below">
-                  <span
-                    className="closure-timeline__stem closure-timeline__stem--from-dot"
-                    aria-hidden="true"
-                  />
-                  <span className="closure-timeline__frame">
-                    <img
-                      src={entry.image}
-                      alt=""
-                      loading="lazy"
-                      className="closure-timeline__img"
-                    />
+                  <span className="closure-timeline__title">
+                    {shortTitle(entry.title)}
                   </span>
                 </span>
+                <span
+                  className="closure-timeline__stem closure-timeline__stem--to-rail"
+                  aria-hidden="true"
+                />
               </button>
             </li>
           ))}

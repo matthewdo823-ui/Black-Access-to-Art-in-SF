@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import BlackPopulationDeclineChart from '../components/charts/BlackPopulationDeclineChart'
+import ExhibitAtmosphere from '../components/ExhibitAtmosphere'
 import ClosureTimeline from '../components/timeline/ClosureTimeline'
 import { useSectionReveal } from '../hooks/useSectionReveal'
 import './Exhibit2.css'
@@ -54,7 +55,8 @@ export default function Exhibit2() {
   }, [])
 
   return (
-    <div className="exhibit-page exhibit2-page">
+    <div className="exhibit-page exhibit2-page has-exhibit-atmosphere">
+      <ExhibitAtmosphere variant="exhibit2" />
       <header className="page-header exhibit2-header">
         <Link className="back-link" to="/">
           ← Collection

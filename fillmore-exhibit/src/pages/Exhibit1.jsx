@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PopulationMountainChart from '../components/charts/PopulationMountainChart'
 import SpiralVenuesChart from '../components/charts/SpiralVenuesChart'
+import ExhibitAtmosphere from '../components/ExhibitAtmosphere'
 import PhotoGallery from '../components/gallery/PhotoGallery'
 import { useSectionReveal } from '../hooks/useSectionReveal'
 import './Exhibit1.css'
@@ -55,7 +56,8 @@ export default function Exhibit1() {
   }, [])
 
   return (
-    <div className="exhibit-page exhibit1-page">
+    <div className="exhibit-page exhibit1-page has-exhibit-atmosphere">
+      <ExhibitAtmosphere variant="exhibit1" />
       <header className="page-header exhibit1-header">
         <Link className="back-link" to="/">
           ← Collection

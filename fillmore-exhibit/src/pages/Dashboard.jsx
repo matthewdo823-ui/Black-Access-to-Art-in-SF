@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import ExhibitAtmosphere from '../components/ExhibitAtmosphere'
 import './Dashboard.css'
 
 const EXHIBITS = [
@@ -9,7 +10,8 @@ const EXHIBITS = [
 
 export default function Dashboard() {
   return (
-    <div className="dashboard-page">
+    <div className="dashboard-page has-exhibit-atmosphere">
+      <ExhibitAtmosphere variant="collection" />
       <div className="dashboard-shell">
         <header className="hero-header">
           <p className="hero-eyebrow">SAN FRANCISCO · A SPATIAL INVESTIGATION</p>

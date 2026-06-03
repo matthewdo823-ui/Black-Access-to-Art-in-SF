@@ -13,6 +13,41 @@
   align-items: stretch;
 }
 
+/* Four photos — 2×2 bento, natural image proportions (no crop) */
+.photo-gallery__grid--count-4 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: auto;
+  gap: clamp(12px, 1.6vw, 18px);
+  align-items: start;
+}
+
+.photo-gallery__grid--count-4 .gallery-card,
+.photo-gallery__grid--count-4 .gallery-card--wide,
+.photo-gallery__grid--count-4 .gallery-card--tall,
+.photo-gallery__grid--count-4 .gallery-card--hero {
+  grid-column: auto;
+  grid-row: auto;
+  height: auto;
+}
+
+.photo-gallery__grid--count-4 .gallery-card__media {
+  flex: none;
+  height: auto;
+  line-height: 0;
+}
+
+.photo-gallery__grid--count-4 .gallery-card__img {
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+  vertical-align: top;
+}
+
+.photo-gallery__grid--count-4 .gallery-card__caption {
+  line-height: 1.35;
+  white-space: normal;
+}
+
 .gallery-card {
   position: relative;
   display: flex;
@@ -72,6 +107,11 @@
   transform: scale(1.04);
 }
 
+.photo-gallery__grid--count-4 .gallery-card:hover .gallery-card__img,
+.photo-gallery__grid--count-4 .gallery-card:focus-visible .gallery-card__img {
+  transform: none;
+}
+
 .gallery-card__overlay {
   position: absolute;
   inset: 0;
@@ -106,20 +146,39 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  padding: 6px 10px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 3.8rem;
+  padding: 8px 12px 7px;
   font-family: 'IBM Plex Mono', ui-monospace, monospace;
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
   color: #2a2218;
   background: linear-gradient(145deg, #f4ecd8 0%, #e8dcc4 45%, #d4c4a4 100%);
-  border: 2px dashed rgba(90, 72, 52, 0.45);
-  border-radius: 2px;
+  border: 2px dashed rgba(90, 72, 52, 0.5);
+  border-radius: 3px;
   box-shadow:
-    2px 3px 0 rgba(0, 0, 0, 0.22),
+    2px 4px 0 rgba(0, 0, 0, 0.24),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
   transform: rotate(3deg);
   pointer-events: none;
+}
+
+.gallery-card__stamp-label {
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+  opacity: 0.82;
+}
+
+.gallery-card__stamp-year {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .gallery-card__caption {
@@ -151,6 +210,10 @@
   .gallery-card--hero {
     grid-column: span 2;
   }
+
+  .photo-gallery__grid--count-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 560px) {
@@ -169,6 +232,10 @@
 
   .gallery-card__media {
     aspect-ratio: 4 / 3;
+  }
+
+  .photo-gallery__grid--count-4 {
+    grid-template-columns: 1fr;
   }
 }
 

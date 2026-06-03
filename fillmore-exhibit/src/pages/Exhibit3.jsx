@@ -5,6 +5,7 @@ import {
   EXHIBIT_PROCESS_CARD,
   LAYER_CONTROLS,
 } from '../data/exhibitContext'
+import ExhibitAtmosphere from '../components/ExhibitAtmosphere'
 import { useExhibitMap } from '../hooks/useExhibitMap'
 import './Exhibit3.css'
 
@@ -109,7 +110,8 @@ export default function Exhibit3() {
   }, [])
 
   return (
-    <div className="exhibit-page">
+    <div className="exhibit-page has-exhibit-atmosphere">
+      <ExhibitAtmosphere variant="exhibit3" />
       <div className="page-shell">
         <header className="page-header">
           <Link className="back-link" to="/">

@@ -1,8 +1,9 @@
 .closure-timeline {
   --rail-inset: 11%;
+  --stem-gap: 6px;
   position: relative;
   width: 100%;
-  padding: clamp(16px, 3vw, 28px) 0 clamp(12px, 2vw, 20px);
+  padding: clamp(16px, 3vw, 28px) 0 clamp(8px, 1.5vw, 16px);
   overflow: visible;
 }
 
@@ -11,7 +12,7 @@
   max-width: min(1100px, 100%);
   margin: 0 auto;
   padding-inline: clamp(12px, 2.5vw, 28px);
-  min-height: clamp(380px, 52vw, 440px);
+  min-height: clamp(200px, 28vw, 260px);
   overflow: visible;
 }
 
@@ -21,9 +22,9 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 56px;
+  bottom: 0;
+  height: 40px;
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -91,8 +92,8 @@
 
 .closure-timeline__span-label {
   position: absolute;
-  top: calc(50% + 16px);
-  font-size: 0.75rem;
+  top: calc(50% - 22px);
+  font-size: 0.6875rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
@@ -131,65 +132,55 @@
   position: relative;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 44px;
   width: 100%;
-  height: clamp(380px, 52vw, 440px);
+  min-height: clamp(180px, 26vw, 240px);
   overflow: visible;
 }
 
 .closure-timeline__marker {
   position: absolute;
-  top: 50%;
+  bottom: 44px;
   left: var(--position, 50%);
   margin: 0;
   padding: 0;
   opacity: 0;
-  z-index: 1;
-  transform: translate(-50%, -50%);
+  z-index: 3;
+  transform: translateX(-50%);
 }
 
-.closure-timeline__thumb {
-  position: relative;
+.closure-timeline__trigger {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 8px;
   margin: 0;
   padding: 0;
   border: none;
   background: transparent;
   cursor: pointer;
-  width: clamp(100px, 11.5vw, 132px);
-}
-
-.closure-timeline__stack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.closure-timeline__stack--above {
-  gap: 10px;
-}
-
-.closure-timeline__stack--below {
-  gap: 14px;
+  width: clamp(108px, 12vw, 140px);
 }
 
 .closure-timeline__caption {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2px;
   width: 100%;
   max-width: 100%;
+  min-height: 3.25rem;
   padding: 7px 8px;
   text-align: center;
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(92, 78, 61, 0.14);
   border-radius: 10px;
   box-shadow: 0 6px 20px rgba(47, 42, 39, 0.08);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .closure-timeline__year {
@@ -222,72 +213,33 @@
   background: var(--marker-accent, rgba(93, 78, 63, 0.55));
 }
 
-.closure-timeline__stem--to-dot {
-  height: clamp(32px, 4.5vw, 44px);
-  opacity: 0.9;
+.closure-timeline__stem--to-rail {
+  height: clamp(20px, 3vw, 28px);
+  margin-bottom: var(--stem-gap);
+  opacity: 0.85;
 }
 
-.closure-timeline__stem--from-dot {
-  height: clamp(18px, 2.8vw, 26px);
-  opacity: 0.75;
-}
-
-.closure-timeline__frame {
-  position: relative;
-  display: block;
-  width: clamp(68px, 8.5vw, 88px);
-  height: clamp(68px, 8.5vw, 88px);
-  margin: 0 auto;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #1a1714;
+.closure-timeline__trigger:hover .closure-timeline__caption,
+.closure-timeline__trigger:focus-visible .closure-timeline__caption {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--marker-accent, #8b2942) 35%, transparent);
   box-shadow:
-    0 2px 0 rgba(255, 255, 255, 0.5) inset,
-    0 10px 28px rgba(47, 42, 39, 0.18),
-    0 0 0 1px rgba(92, 78, 61, 0.14);
-  transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s ease;
+    0 10px 28px rgba(47, 42, 39, 0.14),
+    0 0 0 2px color-mix(in srgb, var(--marker-accent, #c49a5c) 25%, transparent);
 }
 
-.closure-timeline__img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: sepia(0.18) contrast(1.05) brightness(0.95);
-  transition:
-    filter 0.4s ease,
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.closure-timeline__thumb:hover .closure-timeline__frame,
-.closure-timeline__thumb:focus-visible .closure-timeline__frame {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow:
-    0 2px 0 rgba(255, 255, 255, 0.55) inset,
-    0 16px 36px rgba(71, 56, 44, 0.26),
-    0 0 0 2px var(--marker-accent, var(--dubois-gold, #c49a5c));
-}
-
-.closure-timeline__thumb:hover .closure-timeline__img,
-.closure-timeline__thumb:focus-visible .closure-timeline__img {
-  filter: none;
-  transform: scale(1.05);
-}
-
-.closure-timeline__thumb:focus-visible {
+.closure-timeline__trigger:focus-visible {
   outline: none;
 }
 
-.closure-timeline__thumb:focus-visible .closure-timeline__frame {
+.closure-timeline__trigger:focus-visible .closure-timeline__caption {
   outline: 2px solid var(--marker-accent, var(--dubois-gold, #c49a5c));
   outline-offset: 3px;
 }
 
 .closure-timeline__marker:hover,
-.closure-timeline__marker:has(.closure-timeline__thumb:focus-visible) {
-  z-index: 2;
+.closure-timeline__marker:has(.closure-timeline__trigger:focus-visible) {
+  z-index: 4;
 }
 
 /* —— Vertical list (narrow screens) —— */
@@ -306,7 +258,6 @@
     bottom: 8px;
     width: 3px;
     height: auto;
-    transform: none;
   }
 
   .closure-timeline__track,
@@ -356,44 +307,26 @@
   .closure-timeline__markers {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    height: auto;
-    padding: 4px 0 12px;
+    gap: 12px;
+    min-height: 0;
+    padding: 4px 0 12px 0;
   }
 
   .closure-timeline__marker,
   .closure-timeline__marker--caption-above {
     position: relative;
-    top: auto;
+    bottom: auto;
     left: auto;
     transform: none;
     opacity: 1;
   }
 
-  .closure-timeline__thumb {
+  .closure-timeline__trigger {
     flex-direction: row;
     align-items: stretch;
-    gap: 12px;
+    gap: 0;
     width: 100%;
     max-width: none;
-  }
-
-  .closure-timeline__stack--above,
-  .closure-timeline__stack--below {
-    flex-direction: row;
-    flex: 1;
-    min-width: 0;
-    gap: 12px;
-    padding: 0;
-  }
-
-  .closure-timeline__stack--above {
-    order: 2;
-  }
-
-  .closure-timeline__stack--below {
-    order: 1;
-    flex: 0 0 auto;
   }
 
   .closure-timeline__caption {
@@ -420,23 +353,11 @@
   .closure-timeline__stem {
     display: none;
   }
-
-  .closure-timeline__frame {
-    flex-shrink: 0;
-    width: 72px;
-    height: 72px;
-    margin: 0;
-  }
 }
 
 @media (max-width: 640px) {
   .closure-timeline__stage {
     padding-left: 28px;
-  }
-
-  .closure-timeline__frame {
-    width: 64px;
-    height: 64px;
   }
 
   .closure-timeline__caption {

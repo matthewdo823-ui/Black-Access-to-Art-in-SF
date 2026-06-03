@@ -218,12 +218,15 @@ export default function PhotoGallery() {
 
   return (
     <section ref={sectionRef} className="photo-gallery" aria-label="Archival photo gallery">
-      <div ref={gridRef} className="photo-gallery__grid">
+      <div
+        ref={gridRef}
+        className={`photo-gallery__grid photo-gallery__grid--count-${GALLERY_PHOTOS.length}`}
+      >
         {GALLERY_PHOTOS.map((photo, index) => (
           <button
             key={photo.id}
             type="button"
-            className={`gallery-card ${photo.gridClass}`.trim()}
+            className={`gallery-card ${photo.gridClass} gallery-card--${photo.orientation}`.trim()}
             onClick={() => openPhoto(index)}
             aria-label={`View ${photo.title}, ${photo.year}`}
           >
@@ -237,7 +240,10 @@ export default function PhotoGallery() {
               <span className="gallery-card__overlay" aria-hidden="true">
                 <span className="gallery-card__view">VIEW +</span>
               </span>
-              <span className="gallery-card__stamp">{photo.year}</span>
+              <span className="gallery-card__stamp" aria-label={`Year ${photo.year}`}>
+                <span className="gallery-card__stamp-label">Year</span>
+                <span className="gallery-card__stamp-year">{photo.year}</span>
+              </span>
             </span>
             <span className="gallery-card__caption">{photo.caption}</span>
           </button>
