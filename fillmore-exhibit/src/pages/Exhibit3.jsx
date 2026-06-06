@@ -118,7 +118,7 @@ export default function Exhibit3() {
             ← Collection
           </Link>
           <div className="header-meta">
-            <span className="chapter-label">EXHIBIT III — THE MAP</span>
+            <span className="chapter-label">EXHIBIT III · THE MAP</span>
             <div className="page-nav">
               <span className="nav-dot active" />
               <span className="nav-dot" />
@@ -132,7 +132,7 @@ export default function Exhibit3() {
             <p className="eyebrow">SPATIAL DATA · PRESENT DAY</p>
             <h1>The gap has a shape. It can be mapped.</h1>
             <p className="intro-copy">
-              Modern arts institutions cluster where Black residents no longer live;
+              Modern arts institutions cluster where Black residents no longer live,
               following the exact boundaries of historic redlining.
             </p>
 
@@ -159,7 +159,7 @@ export default function Exhibit3() {
             </section>
 
             <section className="stats-card">
-              <h2>Civic Art Locations per neighborhood</h2>
+              <h2>Civic Art Locations per Neighborhood</h2>
               <ul className="stats-list">
                 <li>
                   <strong>SoMa</strong>

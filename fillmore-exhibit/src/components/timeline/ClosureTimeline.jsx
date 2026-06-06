@@ -30,7 +30,7 @@ function formatYear(year) {
 }
 
 function shortTitle(title) {
-  return title.replace(/\s*—\s*.*$/, '').trim()
+  return title.replace(/\s*[,·]\s*.*$/, '').trim()
 }
 
 
@@ -169,7 +169,7 @@ export default function ClosureTimeline() {
     const numericYears = CLOSURE_TIMELINE_ENTRIES.map((e) => e.year).filter(
       (y) => typeof y === 'number',
     )
-    if (!numericYears.length) return { start: '—', end: '—' }
+    if (!numericYears.length) return { start: '...', end: '...' }
     return {
       start: String(Math.min(...numericYears)),
       end: String(Math.max(...numericYears)),

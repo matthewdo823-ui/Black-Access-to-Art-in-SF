@@ -5,7 +5,7 @@ import './Dashboard.css'
 const EXHIBITS = [
   { index: 'I', title: 'The Harlem of the West', path: '/exhibit/1', active: false },
   { index: 'II', title: 'Urban Renewal', path: '/exhibit/2', active: false },
-  { index: 'III', title: 'A Moderninity Gap in the Map', path: '/exhibit/3', active: false },
+  { index: 'III', title: 'A Modernity Gap in the Map', path: '/exhibit/3', active: false },
 ]
 
 export default function Dashboard() {
@@ -18,11 +18,11 @@ export default function Dashboard() {
           <h1>
             The Fillmore Erased:
             <br />
-            Access to Art in San Fransisco
+            Access to Art in San Francisco
           </h1>
           <p className="hero-copy">
-            Three exhibits revealing how a neighborhood lost its culture; and where
-            the San Fransisco's arts went instead.
+            Three exhibits revealing how a neighborhood lost its culture, and where
+            San Francisco's arts went instead.
           </p>
         </header>
 

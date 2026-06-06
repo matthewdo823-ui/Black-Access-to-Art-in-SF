@@ -13,7 +13,7 @@ export const GALLERY_PHOTOS = [
     orientation: 'landscape',
     gridClass: 'gallery-card--wide',
     description:
-      'During World War II, shipyard workers and servicemen lived in the Fillmore’s clubs and restaurants. Streetcar lines were constantly running, and Neon signs for "supper clubs" and pool halls lit the corridor for a long time.',
+      'During World War II, shipyard workers and servicemen lived in the Fillmore’s clubs and restaurants. Streetcar lines ran constantly, and neon signs for "supper clubs" and pool halls lit the corridor deep into the night.',
     related: 'In 1942, roughly 14 nightclubs and dance halls operated along Fillmore Street.',
   },
   {

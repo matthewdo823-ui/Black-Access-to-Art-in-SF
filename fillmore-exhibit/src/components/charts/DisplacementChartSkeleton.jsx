@@ -157,7 +157,7 @@ export default function DisplacementChartSkeleton({
         </g>
       </svg>
 
-      <p className="displacement-skeleton__note">Data visualization — placeholder</p>
+      <p className="displacement-skeleton__note">Data visualization (placeholder)</p>
     </figure>
   )
 }

@@ -253,6 +253,28 @@
   border: 1px solid rgba(92, 78, 61, 0.06);
 }
 
+.chart-frame--photo {
+  margin: 0;
+  padding: 16px;
+  min-height: 0;
+}
+
+.chart-frame--photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+
+.chart-frame-caption {
+  margin: 14px 4px 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #8f7e6f;
+  font-style: italic;
+  text-align: center;
+}
+
 /* Museum artifact */
 
 .artifact-layout {

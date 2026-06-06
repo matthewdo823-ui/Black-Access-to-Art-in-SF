@@ -63,7 +63,7 @@ export default function Exhibit1() {
           ← Collection
         </Link>
         <div className="header-meta">
-          <span className="chapter-label">EXHIBIT I — THE HARLEM OF THE WEST</span>
+          <span className="chapter-label">EXHIBIT I · THE HARLEM OF THE WEST</span>
           <div className="page-nav" aria-label="Exhibit sections">
             {SECTIONS.map((section, index) => (
               <a
@@ -84,7 +84,7 @@ export default function Exhibit1() {
             <p className="eyebrow">Exhibit I · San Francisco, 1940–1970</p>
             <h1>The Harlem of the West</h1>
             <p className="intro-copy exhibit-chapter-lead">
-              Fillmore: a city filled with jazz, nightclubs, and the greatest Black artists of the time.
+              The Fillmore: a district filled with jazz, nightclubs, and the greatest Black artists of the time.
             </p>
             <p className="scroll-hint">Scroll to enter the record</p>
           </article>
@@ -123,7 +123,7 @@ export default function Exhibit1() {
               <aside className="chart-aside">
                 <p className="eyebrow chart-aside-eyebrow">Nightlife geography</p>
                 <p className="chart-aside-body">
-                Jazz and entertainment venues spiked with African American migration in the 30’s and 40’s. However, urban renewal projects of the 70’s-80’s used eminent domain to break down private, black owned businesses (Western Addition Area A-2 Redevelopment Plan). This disproportionately affected Black and Japanese minorities, displacing them for their neighborhoods. The displacement of Black Americans broke their ability to forge cultural communities, and tied with other oppressive policies, led to modern-day inequality in access to art.
+                Jazz and entertainment venues spiked with African American migration in the 1930s and 1940s. However, urban renewal projects of the 1970s–1980s used eminent domain to shut down private, Black-owned businesses (Western Addition Area A-2 Redevelopment Plan). This disproportionately affected Black and Japanese minorities, displacing them from their neighborhoods. The displacement of Black Americans undermined their ability to forge cultural communities and, tied to other oppressive policies, led to modern-day inequality in access to art. While the next exhibit will tackle this destructive practice, it is worth noting that Black art institutions both spiked and declined faster than the Fillmore’s Black population because business closures preceded the displacement of residents.
                 </p>
               </aside>
               <div className="chart-frame">

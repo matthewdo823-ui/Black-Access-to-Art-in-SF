@@ -501,6 +501,12 @@ body.fullscreen-active {
     }
 }
 
+/* Beat .has-exhibit-atmosphere > :not(.exhibit-atmosphere) { z-index: 1; position: relative } */
+.has-exhibit-atmosphere > .context-modal {
+    position: fixed;
+    z-index: 1200;
+}
+
 .context-modal {
     position: fixed;
     inset: 0;

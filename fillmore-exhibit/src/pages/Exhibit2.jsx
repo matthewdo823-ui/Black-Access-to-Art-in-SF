@@ -9,6 +9,7 @@ import './Exhibit2.css'
 const SECTIONS = [
   { id: 'hero', label: 'Opening' },
   { id: 'city-displacement', label: 'City' },
+  { id: 'urban-renewal', label: 'Renewal' },
   { id: 'fillmore-displacement', label: 'Closures' },
   { id: 'shutdown-artifact', label: 'Artifact' },
 ]
@@ -62,7 +63,7 @@ export default function Exhibit2() {
           ← Collection
         </Link>
         <div className="header-meta">
-          <span className="chapter-label">EXHIBIT II — URBAN RENEWAL</span>
+          <span className="chapter-label">EXHIBIT II · URBAN RENEWAL</span>
           <div className="page-nav" aria-label="Exhibit sections">
             {SECTIONS.map((section, index) => (
               <a
@@ -102,7 +103,7 @@ export default function Exhibit2() {
               <aside className="chart-aside">
                 <p className="eyebrow chart-aside-eyebrow">Citywide context</p>
                 <p className="chart-aside-body">
-                “Negro removal” was a synonym to urban renewal. Discriminatory housing policies, forced displacement, and gentrification pushed Black Americans out of San Francisco and made it more difficult for them to return. Certificates, in return for eminent domain, offered little respite as redevelopment took nearly a decade; much too long for any family. The pushing-out of Black Americans from the San Fransiscan space had a significant impact on top-level demographics, but it also left those who remained in a similarly poor situation.
+                “Negro removal” was a synonym for urban renewal. Discriminatory housing policies, forced displacement, and gentrification pushed Black Americans out of San Francisco and made it more difficult for them to return. Certificates, in return for eminent domain, offered little respite as redevelopment took nearly a decade; far too long for any family. The pushing-out of Black Americans from San Franciscan space had a significant impact on top-level demographics, but it also left those who remained in a similarly poor situation.
                 </p>
               </aside>
               <div className="chart-frame">
@@ -113,12 +114,43 @@ export default function Exhibit2() {
         </ExhibitSection>
 
         <ExhibitSection
+          id="urban-renewal"
+          className="exhibit2-section--chart"
+        >
+          <article className="exhibit2-chapter exhibit2-chapter--chart">
+            <header className="exhibit2-chapter-header">
+              <span className="chapter-num">03</span>
+              <h2>The Impact of Western Addition A-2</h2>
+            </header>
+            <div className="chart-layout">
+              <aside className="chart-aside">
+                <p className="eyebrow chart-aside-eyebrow">"Redevelopment"</p>
+                <p className="chart-aside-body">
+                The Western Addition Redevelopment Project overseen by the San Francisco Redevelopment Agency was executed in two phases: A-1 (late 1950s) and A-2 (1960s–1970s). Justin Herman, the SFRA director, pushed the policy through under the framing that it was for the benefit of the people. The Federal Housing Act of 1949 used the term “slum clearance” to fund the majority of this project, but it was local development agencies that executed it. The psychological impacts of urban renewal were drastic and lasting. While the government framed Fillmore as the slums, the churches, jazz clubs, and restaurants acted as third places for the Black community. Regardless of their economic or political situation, they could encourage one another and find strength in unified resilience. The forced dispersal of Black San Franciscans stripped them of their support, and the inability to return led to lasting economic and psychological impacts. 
+                </p>
+              </aside>
+              <figure className="chart-frame chart-frame--photo">
+                <img
+                  src="https://www.foundsf.org/images/thumb/f/f1/WA_vacant_lot1.jpg/720px-WA_vacant_lot1.jpg"
+                  alt="Aerial view of a cleared vacant lot in the Western Addition Area A-2 redevelopment zone"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption className="chart-frame-caption">
+                  The Western Addition A-2 · San Francisco Redevelopment Agency
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        </ExhibitSection>
+
+        <ExhibitSection
           id="fillmore-displacement"
           className="exhibit2-section--timeline"
         >
           <article className="exhibit2-chapter exhibit2-chapter--timeline">
             <header className="exhibit2-chapter-header">
-              <span className="chapter-num">03</span>
+              <span className="chapter-num">04</span>
               <h2>Fillmore Closures</h2>
             </header>
             <div className="closure-timeline-panel">
@@ -133,7 +165,7 @@ export default function Exhibit2() {
         >
           <article className="exhibit2-chapter exhibit2-chapter--artifact">
             <header className="exhibit2-chapter-header">
-              <span className="chapter-num">04</span>
+              <span className="chapter-num">05</span>
               <h2>Fillmore's Legacy</h2>
             </header>
             <div className="artifact-layout">
@@ -158,7 +190,7 @@ export default function Exhibit2() {
                       1921
                     </p>
                     <p className="museum-artifact__plaque-copy">
-                    Urban renewal was not one large or grand event; rather, it was a series of policies that progressively stripped away more and more space from Black Americans. By the end, Black community was stratified, and the Fillmore’s short history is a reminder of what once was.
+                    Urban renewal was not one large or grand event; rather, it was a series of policies that progressively stripped away more and more space from Black Americans. By the end, the Black community was stratified, and the Fillmore’s short history is a reminder of what once was.
 
                     </p>
                   </figcaption>

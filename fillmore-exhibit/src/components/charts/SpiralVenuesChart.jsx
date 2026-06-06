@@ -11,7 +11,7 @@ const VENUE_DATA = [
   { decade: '1950s', venues: 35 },
   { decade: '1960s', venues: 15 },
   { decade: '1970s', venues: 3 },
-  { decade: "1980's", venues: 1 },
+  { decade: '1980s', venues: 1 },
 ]
 
 const SIZE = 520
@@ -46,7 +46,7 @@ function buildArcs() {
       endAngle,
     })
 
-    const labelR = outerR + (d.decade === "1980's" ? 30 : 22)
+    const labelR = outerR + (d.decade === '1980s' ? 30 : 22)
     const labelX = Math.sin(midAngle) * labelR
     const labelY = -Math.cos(midAngle) * labelR
     const normalizedAngle =
@@ -187,7 +187,7 @@ export default function SpiralVenuesChart() {
               className="dubois-chart__legend-swatch"
               style={{ background: arc.color }}
             />
-            {arc.decade} — {arc.venues}
+            {arc.decade} · {arc.venues}
           </li>
         ))}
       </ul>

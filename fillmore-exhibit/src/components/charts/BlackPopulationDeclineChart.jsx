@@ -251,7 +251,7 @@ export default function BlackPopulationDeclineChart() {
               transform={`translate(${-52}, ${INNER_H / 2}) rotate(-90)`}
               textAnchor="middle"
             >
-              Black population
+              Black Population
             </text>
           </g>
         </g>
